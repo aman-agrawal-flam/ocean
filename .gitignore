@@ -27,3 +27,6 @@ res/**/win/**/*.res
 # XCode temporary files
 ProjectSettings.plist
 ProjectSettings.plist.lock
+
+# CMake generated files
+/build

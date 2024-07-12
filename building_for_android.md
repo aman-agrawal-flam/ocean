@@ -55,6 +55,7 @@ Define the following environment variables:
 **Setting Environment Variables**
 
 On Linux, macOS (and other Unixes) add the following lines to your terminal config file (e.g., `.zshrc`, `.bashrc`, `.profile`) or copy-and-paste them directly into the current terminal (each time):
+Make sure the version mentioned for Android ndk is matching with what you have installed or else update the ndk version here as this will break the build process.
 
 ```bash
 export ANDROID_HOME="${HOME}/Library/Android/sdk"
@@ -135,7 +136,7 @@ To build the APK, run "gradlew" from the directory in the manner examplified bel
 
 ```
 # Adjust this to your location of the third-party libraries
-export OCEAN_THIRDPARTY_PATH="${HOME}/install_ocean_thirdparty_android
+export OCEAN_THIRDPARTY_PATH="${HOME}/install_ocean_thirdparty"
 
 cd ${OCEAN_DEVELOPMENT_PATH}/build/gradle/application/ocean/demo/base/console/android
 

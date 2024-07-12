@@ -10,7 +10,7 @@ add_subdirectory(jni)
 if (MACOS OR ANDROID OR IOS OR LINUX OR WIN32)
 
     set(OCEAN_TARGET_NAME "ocean_scenedescription_sdl_assimp")
-
+    set(CMAKE_PREFIX_PATH "/opt/homebrew/Cellar/assimp/5.x.y/;/opt/homebrew")
     find_package(assimp REQUIRED)
 
     # Source files
