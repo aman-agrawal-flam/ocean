@@ -91,7 +91,7 @@ android {
 
   defaultConfig {
     applicationId = "com.meta.ocean.app.test.cv.testcv.testdetector.testqrcodes.android"
-    minSdk = 33
+    minSdk = 26
     targetSdk = 33
     versionCode = 1
     versionName = "1.0"
