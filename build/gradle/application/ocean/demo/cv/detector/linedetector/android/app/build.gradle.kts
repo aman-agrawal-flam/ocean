@@ -95,7 +95,7 @@ android {
 
   defaultConfig {
     applicationId = "com.meta.ocean.app.demo.cv.detector.linedetector.android"
-    minSdk = 33
+    minSdk = 24
     targetSdk = 33
     versionCode = 1
     versionName = "1.0"

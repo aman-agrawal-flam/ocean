@@ -97,7 +97,7 @@ android {
 
   defaultConfig {
     applicationId = "com.meta.ocean.app.demo.tracking.homographyimagealigner.android"
-    minSdk = 33
+    minSdk = 24
     targetSdk = 33
     versionCode = 1
     versionName = "1.0"

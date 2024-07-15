@@ -109,7 +109,7 @@ android {
 
   defaultConfig {
     applicationId = "com.meta.ocean.app.shark.android"
-    minSdk = 33
+    minSdk = 24
     targetSdk = 33
     versionCode = 1
     versionName = "1.0"
