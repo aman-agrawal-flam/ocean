@@ -30,3 +30,4 @@ ProjectSettings.plist.lock
 
 # CMake generated files
 /build
+/.vscode
