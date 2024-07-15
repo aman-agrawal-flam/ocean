@@ -1,10 +1,3 @@
-/*
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 package com.meta.ocean.app.shark.android;
 
 import com.meta.ocean.devices.android.DevicesAndroidJni;
@@ -15,6 +8,13 @@ import com.meta.ocean.platform.android.application.*;
 import com.meta.ocean.scenedescription.sdl.obj.SceneDescriptionSDLOBJJni;
 import com.meta.ocean.scenedescription.sdx.x3d.SceneDescriptionSDXX3DJni;
 import android.os.Bundle;
+import android.os.AsyncTask;
+import android.util.Log;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * This class implements the main Activity object for the Shark viewer.
@@ -22,6 +22,8 @@ import android.os.Bundle;
  */
 public class SharkActivity extends GLFrameViewActivity
 {
+    private static final String TAG = "SharkActivity";
+
 	static
 	{
 		System.loadLibrary("OceanShark");
@@ -33,17 +35,58 @@ public class SharkActivity extends GLFrameViewActivity
 		super.onCreate(savedInstanceState);
 
 		MediaOpenImageLibrariesJni.registerLibrary();
-
 		DevicesAndroidJni.registerLibrary();
 		DevicesPatternJni.registerLibrary();
-
 		SceneDescriptionSDLOBJJni.registerLibrary();
 		SceneDescriptionSDXX3DJni.registerLibrary();
 
 		final String assetDir = getExternalFilesDir(null) + "/";
 		Assets.copyFiles(getAssets(), assetDir, true);
-		NativeInterfaceShark.loadScene(assetDir + "dinosaur.ox3dv", true);
+
+        // URL of the asset to download
+        String assetUrl = "https://drive.google.com/file/d/1UTt6P3gaQkRrIgsM8GaNz9dcDrkR-f33/view?usp=drive_link";
+        new DownloadAndLoadSceneTask().execute(assetUrl, assetDir);
+		// NativeInterfaceShark.loadScene(assetDir + "dinosaur.ox3dv", true);
 	}
+
+    private class DownloadAndLoadSceneTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String assetUrl = params[0];
+            String assetDir = params[1];
+            try {
+                URL url = new URL(assetUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    return null;
+                }
+                InputStream input = connection.getInputStream();
+                File file = new File(assetDir, "tropical-island-with-toucans.jpeg");
+                FileOutputStream output = new FileOutputStream(file);
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    output.write(buffer, 0, bytesRead);
+                }
+                output.close();
+                input.close();
+                return file.getAbsolutePath();
+            } catch (Exception e) {
+                Log.e(TAG, "Error downloading asset", e);
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String filePath) {
+            if (filePath != null) {
+                NativeInterfaceShark.loadScene(filePath, true);
+            } else {
+                Log.e(TAG, "Failed to download asset");
+            }
+        }
+    }
 
 	@Override
 	protected void onCameraPermissionGranted()
@@ -56,12 +99,9 @@ public class SharkActivity extends GLFrameViewActivity
 	{
 		SceneDescriptionSDXX3DJni.unregisterLibrary();
 		SceneDescriptionSDLOBJJni.unregisterLibrary();
-
 		DevicesPatternJni.unregisterLibrary();
 		DevicesAndroidJni.unregisterLibrary();
-
 		MediaOpenImageLibrariesJni.unregisterLibrary();
-
 		super.onDestroy();
 	}
 }
