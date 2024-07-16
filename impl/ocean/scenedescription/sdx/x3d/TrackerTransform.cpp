@@ -212,7 +212,7 @@ void TrackerTransform::onInitialize(const Rendering::SceneRef& scene, const Time
 						if (objectId_ == Devices::Tracker::invalidObjectId())
 						{
 							const IO::Files resolvedFiles(IO::FileResolver::get().resolve(IO::File(object_.value()), IO::File(filename())));
-
+							Log::info() << "Successfully loaded by Prakhar \"" << filename() << "\" in " << 0 << " seconds.";
 							for (const IO::File& resolvedFile : resolvedFiles)
 							{
 								if (resolvedFile.exists())
