@@ -28,8 +28,8 @@ X3DScene::X3DScene(const std::string& filename, const Library& library, const Re
 	X3DChildNode(nullptr),
 	X3DBoundedObject(nullptr),
 	X3DGroupingNode(nullptr),
-	Scene(filename),
-	SDXScene(filename, library, engine)
+	Scene(filename), 
+	SDXScene(filename, library, engine) 
 {
 	// this node environment pointer will be set in SDXScene()
 	ocean_assert(environment_ != nullptr);
