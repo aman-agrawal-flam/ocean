@@ -478,6 +478,8 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 
 		// the resulting pose transforms points defined in the coordinate system of the camera to points defined in the coordinate system of the world (the pattern)
 
+		Log::info() << "Aman 481: ";
+
 		ocean_assert(!resultingTransformationSamples.empty());
 		const HomogenousMatrix4& resultingPose = resultingTransformationSamples.front().transformation();
 

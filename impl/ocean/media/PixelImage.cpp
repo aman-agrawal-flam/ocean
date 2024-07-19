@@ -108,6 +108,7 @@ Timestamp PixelImage::stopTimestamp() const
 
 bool PixelImage::setPixelImage(Frame&& frame, SharedAnyCamera anyCamera)
 {
+	Log::info() << "Aman PixelImage::setPixelImage()" << frame.isValid();
 	const ScopedLock scopedLock(lock_);
 
 	if (isStarted_)
