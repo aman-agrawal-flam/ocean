@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#ifndef FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_IOS_APP_DELEGATE_H
-#define FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_IOS_APP_DELEGATE_H
+#ifndef FACEBOOK_application_fit_demo_tracking_featuretracker_IOS_APP_DELEGATE_H
+#define FACEBOOK_application_fit_demo_tracking_featuretracker_IOS_APP_DELEGATE_H
 
 #include <UIKit/UIKit.h>
 
@@ -33,4 +33,4 @@
 
 @end
 
-#endif // FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_IOS_APP_DELEGATE_H
+#endif // FACEBOOK_application_fit_demo_tracking_featuretracker_IOS_APP_DELEGATE_H

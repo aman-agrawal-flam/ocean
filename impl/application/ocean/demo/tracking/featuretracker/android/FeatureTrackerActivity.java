@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
- package com.meta.ocean.app.demo.tracking.featuretracker.android;
+ package com.flam.fit.app.demo.tracking.featuretracker.android;
  import com.meta.ocean.base.BaseJni;
  import com.meta.ocean.platform.android.*;
  import com.meta.ocean.platform.android.application.*;
@@ -33,7 +33,7 @@
  {
 	 static
 	 {
-		 System.loadLibrary("OceanDemoTrackingFeatureTracker");
+		 System.loadLibrary("FeatureImageTracking");
 	 }
  
 	 private static final String TAG = "FeatureTrackerActivity";

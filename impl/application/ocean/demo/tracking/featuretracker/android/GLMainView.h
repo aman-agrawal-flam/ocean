@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#ifndef FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_ANDROID_GL_MAIN_VIEW_H
-#define FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_ANDROID_GL_MAIN_VIEW_H
+#ifndef FACEBOOK_application_fit_demo_tracking_featuretracker_ANDROID_GL_MAIN_VIEW_H
+#define FACEBOOK_application_fit_demo_tracking_featuretracker_ANDROID_GL_MAIN_VIEW_H
 
 #include "application/ocean/demo/tracking/featuretracker/FeatureTrackerWrapper.h"
 
@@ -85,6 +85,6 @@ inline Ocean::Platform::Android::Application::GLView* GLMainView::createInstance
  * @return True, if succeeded
  * @ingroup platformandroid
  */
-extern "C" jboolean Java_com_meta_ocean_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_initializeFeatureTracker(JNIEnv* env, jobject javaThis, jstring inputMedium, jstring pattern, jstring resolution);
+extern "C" jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_initializeFeatureTracker(JNIEnv* env, jobject javaThis, jstring inputMedium, jstring pattern, jstring resolution);
 
-#endif // FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_ANDROID_GL_MAIN_VIEW_H
+#endif // FACEBOOK_application_fit_demo_tracking_featuretracker_ANDROID_GL_MAIN_VIEW_H

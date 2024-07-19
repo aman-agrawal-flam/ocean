@@ -101,11 +101,11 @@ tasks.register("removeTemporaryFiles") {
 tasks.named("clean").configure { finalizedBy("removeTemporaryFiles") }
 
 android {
-  namespace = "com.meta.ocean.app.demo.tracking.featuretracker.android"
+  namespace = "com.flam.fit.app.demo.tracking.featuretracker.android"
   compileSdk = 33
 
   defaultConfig {
-    applicationId = "com.meta.ocean.app.demo.tracking.featuretracker.android"
+    applicationId = "com.flam.fit.app.demo.tracking.featuretracker.android"
     minSdk = 24
     targetSdk = 33
     versionCode = 1
@@ -121,14 +121,14 @@ android {
         arguments +=
             "-DOCEAN_THIRD_PARTY_ROOT_FROM_GRADLE=${project.properties["oceanThirdPartyPath"]}"
         arguments += "-B${project.properties["oceanGradleBuildPath"]}"
-        targets += "application_ocean_demo_tracking_featuretracker_android_native"
+        targets += "application_fit_demo_tracking_featuretracker_android_native"
       }
     }
   }
 
   buildTypes {
     release {
-      isMinifyEnabled = false
+      isMinifyEnabled = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
       signingConfig = signingConfigs.getByName("debug")
     }

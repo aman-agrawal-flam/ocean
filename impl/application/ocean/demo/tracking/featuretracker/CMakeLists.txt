@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.26)
 
 if (ANDROID OR IOS OR MACOS)
 
-    set(OCEAN_TARGET_NAME "application_ocean_demo_tracking_featuretracker")
+    set(OCEAN_TARGET_NAME "application_fit_demo_tracking_featuretracker")
 
     # Source files
     file(GLOB OCEAN_TARGET_HEADER_FILES "${CMAKE_CURRENT_LIST_DIR}/*.h")
@@ -82,7 +82,7 @@ endif()
 
 if (ANDROID)
 
-    set(OCEAN_TARGET_NAME "application_ocean_demo_tracking_featuretracker_android_native")
+    set(OCEAN_TARGET_NAME "application_fit_demo_tracking_featuretracker_android_native")
 
     file(GLOB OCEAN_TARGET_HEADER_FILES "${CMAKE_CURRENT_LIST_DIR}/android/*.h")
     file(GLOB OCEAN_TARGET_SOURCE_FILES "${CMAKE_CURRENT_LIST_DIR}/android/*.cpp")
@@ -101,11 +101,11 @@ if (ANDROID)
     )
 
     # The output name of this target must match the one used in `android/FeatureTrackerActivity.java`
-    set_target_properties(${OCEAN_TARGET_NAME} PROPERTIES OUTPUT_NAME OceanDemoTrackingFeatureTracker)
+    set_target_properties(${OCEAN_TARGET_NAME} PROPERTIES OUTPUT_NAME FeatureImageTracking)
 
     target_link_libraries(${OCEAN_TARGET_NAME}
         PUBLIC
-            application_ocean_demo_tracking_featuretracker
+            application_fit_demo_tracking_featuretracker
             ocean_base
             ocean_media
             ocean_media_android
@@ -134,7 +134,7 @@ endif()
 
 if (MACOS)
 
-    set(OCEAN_TARGET_NAME "application_ocean_demo_tracking_featuretracker_osx")
+    set(OCEAN_TARGET_NAME "application_fit_demo_tracking_featuretracker_osx")
 
     # Source files
     file(GLOB OCEAN_TARGET_HEADER_FILES "${CMAKE_CURRENT_LIST_DIR}/osx/*.h")
@@ -144,7 +144,7 @@ if (MACOS)
     add_executable(${OCEAN_TARGET_NAME} MACOSX_BUNDLE ${OCEAN_TARGET_SOURCE_FILES} ${OCEAN_TARGET_HEADER_FILES})
 
     set(MACOSX_DEPLOYMENT_TARGET "10.12")
-    set(PRODUCT_BUNDLE_IDENTIFIER "com.meta.ocean.application.demo.tracking.featuretracker.osx")
+    set(PRODUCT_BUNDLE_IDENTIFIER "com.flam.fit.application.demo.tracking.featuretracker.osx")
     set(EXECUTABLE_NAME ${OCEAN_TARGET_NAME})
     set(PRODUCT_NAME ${OCEAN_TARGET_NAME})
     configure_file(${CMAKE_CURRENT_LIST_DIR}/osx/Info.plist ${CMAKE_CURRENT_BINARY_DIR})
@@ -161,7 +161,7 @@ if (MACOS)
     # Dependencies
     target_link_libraries(${OCEAN_TARGET_NAME}
         PRIVATE
-            application_ocean_demo_tracking_featuretracker
+            application_fit_demo_tracking_featuretracker
             ocean_base
             ocean_platform_apple_macos
     )
@@ -196,7 +196,7 @@ endif()
 #
 #if (WIN32)
 #
-#    set(OCEAN_TARGET_NAME "application_ocean_demo_tracking_featuretracker_win")
+#    set(OCEAN_TARGET_NAME "application_fit_demo_tracking_featuretracker_win")
 #
 #    # Source files
 #    file(GLOB OCEAN_TARGET_HEADER_FILES "${CMAKE_CURRENT_LIST_DIR}/win/*.h")
@@ -213,7 +213,7 @@ endif()
 #    # Dependencies
 #    target_link_libraries(${OCEAN_TARGET_NAME}
 #        PUBLIC
-#            application_ocean_demo_tracking_featuretracker
+#            application_fit_demo_tracking_featuretracker
 #            ocean_base
 #            ocean_platform
 #            ocean_platform_win
@@ -227,7 +227,7 @@ endif()
 
 if (IOS)
 
-    set(OCEAN_TARGET_NAME "application_ocean_demo_tracking_featuretracker_ios")
+    set(OCEAN_TARGET_NAME "application_fit_demo_tracking_featuretracker_ios")
 
     find_library(UIKIT_LIB UiKit)
 

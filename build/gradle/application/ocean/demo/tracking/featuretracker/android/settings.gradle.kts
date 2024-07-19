@@ -21,6 +21,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "OceanDemoTrackingFeatureTracker"
+rootProject.name = "FeatureImageTracking"
 
 include(":app")

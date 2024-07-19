@@ -51,7 +51,7 @@ To try this you'll need to print or display the pattern image used above. A copy
   </TabItem>
 
   <TabItem value="ios" label="iOS">
-    Ensure the [third-party libraries have been built for iOS](https://github.com/facebookresearch/ocean/blob/v1.0.0/building_for_ios.md#2-building-the-third-party-libraries). Then follow the general [setup for building iOS apps using XCode](https://github.com/facebookresearch/ocean/blob/v1.0.0/building_for_ios.md#4-building-the-ocean-ios-demotest-apps). Once the generation of the XCode project is complete, open it and search for `application_ocean_demo_tracking_featuretracker_ios` in the scheme at the top. Then hit `CMD-R` to build, install, and run the app and follow the instructions.
+    Ensure the [third-party libraries have been built for iOS](https://github.com/facebookresearch/ocean/blob/v1.0.0/building_for_ios.md#2-building-the-third-party-libraries). Then follow the general [setup for building iOS apps using XCode](https://github.com/facebookresearch/ocean/blob/v1.0.0/building_for_ios.md#4-building-the-ocean-ios-demotest-apps). Once the generation of the XCode project is complete, open it and search for `application_fit_demo_tracking_featuretracker_ios` in the scheme at the top. Then hit `CMD-R` to build, install, and run the app and follow the instructions.
   </TabItem>
 
   <TabItem value="macos" label="macOS">
@@ -67,10 +67,10 @@ To try this you'll need to print or display the pattern image used above. A copy
     ./build/cmake/build_ocean_linuxunix.sh -c release -l static -b "${HOME}/build_ocean" -i "${HOME}/install_ocean" -t "${HOME}/install_ocean_thirdparty"
 
     # Execute the demo app (a bundle)
-    open ${HOME}/install_ocean/macos_static_Release/bin/application_ocean_demo_tracking_featuretracker_osx.app
+    open ${HOME}/install_ocean/macos_static_Release/bin/application_fit_demo_tracking_featuretracker_osx.app
     ```
 
-    Alternatively, [generate a XCode project for Ocean](https://github.com/facebookresearch/ocean/blob/v1.0.0/building_for_macos.md#4-building-the-ocean-ios-demotest-apps) and search for `application_ocean_demo_tracking_featuretracker_osx` in the schemes at the top. Then hit `CMD-R` to build and run the app.
+    Alternatively, [generate a XCode project for Ocean](https://github.com/facebookresearch/ocean/blob/v1.0.0/building_for_macos.md#4-building-the-ocean-ios-demotest-apps) and search for `application_fit_demo_tracking_featuretracker_osx` in the schemes at the top. Then hit `CMD-R` to build and run the app.
   </TabItem>
 
   <TabItem value="win" label="Windows">

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#ifndef FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_FEATURE_TRACKER_WRAPPER_H
-#define FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_FEATURE_TRACKER_WRAPPER_H
+#ifndef FACEBOOK_application_fit_demo_tracking_featuretracker_FEATURE_TRACKER_WRAPPER_H
+#define FACEBOOK_application_fit_demo_tracking_featuretracker_FEATURE_TRACKER_WRAPPER_H
 
 #include "application/ocean/demo/tracking/ApplicationDemoTracking.h"
 
@@ -164,4 +164,4 @@ Devices::SharedDevicePlayer FeatureTrackerWrapper_createExternalDevicePlayer(con
 
 #endif // OCEAN_USE_EXTERNAL_DEVICE_PLAYER
 
-#endif // FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_FEATURE_TRACKER_WRAPPER_H
+#endif // FACEBOOK_application_fit_demo_tracking_featuretracker_FEATURE_TRACKER_WRAPPER_H

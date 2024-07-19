@@ -81,7 +81,7 @@ points to investigate the code. All demo applications have the same prefix
 
 * `application_ocean_demo_media_videopreview_ios` - an iOS app
 * `application_ocean_demo_media_videopreview_osx` - same app but for macOS
-* `application_ocean_demo_tracking_featuretracker_ios`
+* `application_fit_demo_tracking_featuretracker_ios`
 * `application_ocean_demo_...`
 
 All test applications begin with `application_ocean_test_*`. for example:

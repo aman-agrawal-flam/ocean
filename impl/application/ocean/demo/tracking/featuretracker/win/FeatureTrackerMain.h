@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#ifndef FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_WIN_FEATURE_TRACKER_MAIN_H
-#define FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_WIN_FEATURE_TRACKER_MAIN_H
+#ifndef FACEBOOK_application_fit_demo_tracking_featuretracker_WIN_FEATURE_TRACKER_MAIN_H
+#define FACEBOOK_application_fit_demo_tracking_featuretracker_WIN_FEATURE_TRACKER_MAIN_H
 
 #include "application/ocean/demo/tracking/ApplicationDemoTracking.h"
 
@@ -38,4 +38,4 @@
  *
  * @}
  */
-#endif // FACEBOOK_APPLICATION_OCEAN_DEMO_TRACKING_FEATURETRACKER_WIN_FEATURE_TRACKER_MAIN_H
+#endif // FACEBOOK_application_fit_demo_tracking_featuretracker_WIN_FEATURE_TRACKER_MAIN_H
