@@ -123,9 +123,11 @@
 	 }
  
 	 @Override
-	 protected void onCameraPermissionGranted() {
-		 final String assetDir = getFilesDir().getAbsolutePath() + "/";
-		 initializeFeatureTracker("LiveVideoId:0", assetDir + "cinema.jpeg", "960x540");
+	 protected void onCameraPermissionGranted() 
+	 {
+		final String assetDir = getFilesDir().getAbsolutePath() + "/";
+		boolean result = initializeFeatureTracker("LiveVideoId:0", assetDir + "cinema.jpeg", "960x540");
+		Log.d(TAG, "Aman Feature Tracker initialized" + result);
 	 }
  
 	 /**

@@ -32,6 +32,9 @@ GLMainView::~GLMainView()
 
 void GLMainView::initializeFeatureTracker(const std::string& inputMedium, const std::string& pattern, const std::string& resolution)
 {
+	Log::error() << "Aman was here" << inputMedium << resolution;
+	Log::info() << "Aman was here" << pattern;
+
 	const std::vector<std::wstring> commandLines =
 	{
 		L"-i",
@@ -78,7 +81,7 @@ void GLMainView::threadRun()
 			// @see ocean_app_shark for a high performance implementation of an Augmented Realty application (even more powerful)
 
 			pixelImage_->setPixelImage(std::move(resultingTrackerFrame));
-
+			Log::info() << "Aman 85";
 			Log::info() << resultingTrackerPerformance * 1000.0 << "ms";
 		}
 		else
