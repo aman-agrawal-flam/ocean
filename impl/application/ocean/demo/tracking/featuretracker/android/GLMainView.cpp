@@ -12,7 +12,6 @@
 
 #include "ocean/media/FrameMedium.h"
 #include "ocean/media/Manager.h"
-
 #include "ocean/platform/android/Utilities.h"
 
 using namespace Ocean;
@@ -98,4 +97,14 @@ jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrack
 	GLMainView::get<GLMainView>().initializeFeatureTracker(inputMediumValue, patternValue, resolutionValue);
 
 	return true;
+}
+
+jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_boundingBoxEdges(JNIEnv* env, jobject javaThis) {
+    // FeatureTrackerWrapper* featureTracker = FeatureTrackerWrapper::get<FeatureTrackerWrapper>();
+    // if (featureTracker && featureTracker->boundingBoxEdges()) {
+    //     return true;
+    // }
+    // return false;
+	FeatureTrackerWrapper featureTrackerWrapper;
+	return featureTrackerWrapper.boundingBoxEdges();
 }

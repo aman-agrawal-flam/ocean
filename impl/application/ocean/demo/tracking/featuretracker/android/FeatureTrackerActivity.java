@@ -6,6 +6,7 @@
  */
 
  package com.flam.fit.app.demo.tracking.featuretracker.android;
+
  import com.meta.ocean.base.BaseJni;
  import com.meta.ocean.platform.android.*;
  import com.meta.ocean.platform.android.application.*;
@@ -29,34 +30,52 @@
   * This class implements the main Activity object for the Feature Tracker (Android).
   * @ingroup applicationdemotrackingfeaturetrackerandroid
   */
- public class FeatureTrackerActivity extends GLFrameViewActivity
- {
-	 static
-	 {
+ public class FeatureTrackerActivity extends GLFrameViewActivity {
+	 static {
 		 System.loadLibrary("FeatureImageTracking");
 	 }
  
 	 private static final String TAG = "FeatureTrackerActivity";
 	 private static final String ASSET_URL_BASE = "https://storage.googleapis.com/avatar-system/test/assets/";
  
+	 private Handler handler = new Handler(Looper.getMainLooper());
+	 private Runnable logBoundingBoxEdgesTask = new Runnable() {
+		 @Override
+		 public void run() {
+			 // Log the bounding box edges
+			 Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
+			 // Schedule this task again in the near future (e.g., 1000ms later)
+			 handler.postDelayed(this, 1000);
+		 }
+	 };
+ 
 	 @Override
-	 protected void onCreate(Bundle savedInstanceState)
-	 {
+	 protected void onCreate(Bundle savedInstanceState) {
 		 messageOutput_ = BaseJni.MessageOutput.OUTPUT_QUEUED.value();
- 
 		 super.onCreate(savedInstanceState);
- 
 		 addContentView(new MessengerView(this, true), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
- 
 		 final String assetDir = getFilesDir().getAbsolutePath() + "/";
 		 downloadAssets();
 		 Assets.copyFiles(getAssets(), assetDir + "/", true);
 	 }
  
+	 @Override
+	 public void onStart() {
+		 super.onStart();
+		 // Start the repeating task
+		 handler.post(logBoundingBoxEdgesTask);
+	 }
+ 
+	 @Override
+	 public void onStop() {
+		 super.onStop();
+		 // Stop the repeating task
+		 handler.removeCallbacks(logBoundingBoxEdgesTask);
+	 }
+ 
 	 private void downloadAssets() {
 		 final String assetDir = getFilesDir().getAbsolutePath() + "/";
-		 List<String> files = Arrays.asList("testcinema.ox3dv", "cinema.jpeg",
-				 "trex-attribution.txt", "trex.mtl", "trex.obj", "trex.png");
+		 List<String> files = Arrays.asList("testcinema.ox3dv", "cinema.jpeg", "trex-attribution.txt", "trex.mtl", "trex.obj", "trex.png");
 		 for (String file : files) {
 			 String fileURL = ASSET_URL_BASE + file;
 			 downloadFile(fileURL, assetDir, file);
@@ -123,11 +142,11 @@
 	 }
  
 	 @Override
-	 protected void onCameraPermissionGranted() 
-	 {
-		final String assetDir = getFilesDir().getAbsolutePath() + "/";
-		boolean result = initializeFeatureTracker("LiveVideoId:0", assetDir + "cinema.jpeg", "960x540");
-		Log.d(TAG, "Aman Feature Tracker initialized" + result);
+	 protected void onCameraPermissionGranted() {
+		 final String assetDir = getFilesDir().getAbsolutePath() + "/";
+		 boolean result = initializeFeatureTracker("LiveVideoId:0", assetDir + "cinema.jpeg", "960x540");
+		 // Print bounding box edges in logs
+		 Log.d(TAG, "Aman Feature Tracker initialized" + result);
 	 }
  
 	 /**
@@ -138,5 +157,6 @@
 	  * @return True, if succeeded
 	  */
 	 public static native boolean initializeFeatureTracker(String inputMedium, String pattern, String resolution);
+	 public static native boolean boundingBoxEdges();
  }
  

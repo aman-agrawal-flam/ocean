@@ -83,6 +83,12 @@ class FeatureTrackerWrapper
 		bool trackNewFrame(Frame& resultFrame, double& time);
 
 		/**
+		 * Returns the camera pose of the last frame that has been handled.
+		 * @return The camera pose of the last frame that has been handled
+		 */	
+		bool boundingBoxEdges();
+
+		/**
 		 * Returns the input medium which is used.
 		 * @return The tracker's input medium
 		 */

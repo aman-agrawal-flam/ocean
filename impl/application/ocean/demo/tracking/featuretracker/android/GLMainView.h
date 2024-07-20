@@ -86,5 +86,6 @@ inline Ocean::Platform::Android::Application::GLView* GLMainView::createInstance
  * @ingroup platformandroid
  */
 extern "C" jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_initializeFeatureTracker(JNIEnv* env, jobject javaThis, jstring inputMedium, jstring pattern, jstring resolution);
+extern "C" jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_boundingBoxEdges(JNIEnv* env, jobject javaThis);
 
 #endif // FACEBOOK_application_fit_demo_tracking_featuretracker_ANDROID_GL_MAIN_VIEW_H

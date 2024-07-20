@@ -382,6 +382,8 @@ void FeatureTrackerWrapper::release()
 #endif
 }
 
+bool isBoundingBoxEdges;
+
 bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 {
 	if (visualTracker_.isNull() || inputMedium_.isNull())
@@ -478,23 +480,30 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 
 		// the resulting pose transforms points defined in the coordinate system of the camera to points defined in the coordinate system of the world (the pattern)
 
-		Log::info() << "Aman 481: ";
 
+		isBoundingBoxEdges = true;
+		Log::info() << "Aman 481:" << isBoundingBoxEdges;
+		FeatureTrackerWrapper::boundingBoxEdges();
 		ocean_assert(!resultingTransformationSamples.empty());
 		const HomogenousMatrix4& resultingPose = resultingTransformationSamples.front().transformation();
 
 		const HomogenousMatrix4 resultingPoseIF(PinholeCamera::standard2InvertedFlipped(resultingPose));
 
 		// Below commented code is used to paint the bounding box of the object in the frame used open cv for this purpose 
-
-		// const uint8_t* const black = CV::Canvas::black(rgbFrame.pixelFormat());
-		// const uint8_t* const white = CV::Canvas::white(rgbFrame.pixelFormat());
+ 
+		const uint8_t* const black = CV::Canvas::black(rgbFrame.pixelFormat());
+		const uint8_t* const white = CV::Canvas::white(rgbFrame.pixelFormat());
+		
+		// Log::debug() << "Aman 491: resulting Pose: " << resultingPoseIF;
+		// Log::debug() << " black: " << static_cast<int>(*black) << " white: " << static_cast<int>(*white);
 
 		// Tracking::Utilities::paintBoundingBoxIF(rgbFrame, resultingPoseIF, *anyCamera_, objectDimension_, white, black);
 		Tracking::Utilities::paintCoordinateSystemIF(rgbFrame, resultingPoseIF, *anyCamera_, HomogenousMatrix4(true), objectDimension_.diagonal() * Scalar(0.1));
 	}
 	else
 	{
+		isBoundingBoxEdges = false;
+		FeatureTrackerWrapper::boundingBoxEdges();
 		performance_.stop();
 	}
 
@@ -505,4 +514,10 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 	resultFrame.setTimestamp(lastHandledFrameTimestamp_);
 
 	return true;
+}
+
+bool FeatureTrackerWrapper::boundingBoxEdges()
+{
+	Log::info() << "Aman 518 + " << isBoundingBoxEdges;
+	return isBoundingBoxEdges;
 }
