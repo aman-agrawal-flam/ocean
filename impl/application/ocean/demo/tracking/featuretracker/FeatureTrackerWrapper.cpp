@@ -485,10 +485,12 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 
 		const HomogenousMatrix4 resultingPoseIF(PinholeCamera::standard2InvertedFlipped(resultingPose));
 
-		const uint8_t* const black = CV::Canvas::black(rgbFrame.pixelFormat());
-		const uint8_t* const white = CV::Canvas::white(rgbFrame.pixelFormat());
+		// Below commented code is used to paint the bounding box of the object in the frame used open cv for this purpose 
 
-		Tracking::Utilities::paintBoundingBoxIF(rgbFrame, resultingPoseIF, *anyCamera_, objectDimension_, white, black);
+		// const uint8_t* const black = CV::Canvas::black(rgbFrame.pixelFormat());
+		// const uint8_t* const white = CV::Canvas::white(rgbFrame.pixelFormat());
+
+		// Tracking::Utilities::paintBoundingBoxIF(rgbFrame, resultingPoseIF, *anyCamera_, objectDimension_, white, black);
 		Tracking::Utilities::paintCoordinateSystemIF(rgbFrame, resultingPoseIF, *anyCamera_, HomogenousMatrix4(true), objectDimension_.diagonal() * Scalar(0.1));
 	}
 	else
