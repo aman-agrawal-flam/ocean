@@ -25,6 +25,8 @@
  import android.os.Looper;
  import java.util.Arrays;
  import java.util.List;
+ import android.widget.VideoView;
+ import android.net.Uri;
  
  /**
   * This class implements the main Activity object for the Feature Tracker (Android).
@@ -39,11 +41,18 @@
 	 private static final String ASSET_URL_BASE = "https://storage.googleapis.com/avatar-system/test/assets/";
  
 	 private Handler handler = new Handler(Looper.getMainLooper());
+	 private VideoView videoView;
+ 
 	 private Runnable logBoundingBoxEdgesTask = new Runnable() {
 		 @Override
 		 public void run() {
 			 // Log the bounding box edges
 			 Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
+			 if (boundingBoxEdges()) {
+			
+				playVideo(getFilesDir().getAbsolutePath() + "/samsung-masked_kl4BCZJH.mp4");
+ 	
+			 }
 			 // Schedule this task again in the near future (e.g., 1000ms later)
 			 handler.postDelayed(this, 1000);
 		 }
@@ -53,6 +62,9 @@
 	 protected void onCreate(Bundle savedInstanceState) {
 		 messageOutput_ = BaseJni.MessageOutput.OUTPUT_QUEUED.value();
 		 super.onCreate(savedInstanceState);
+ 
+		 videoView = new VideoView(this);
+		 addContentView(videoView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 		 addContentView(new MessengerView(this, true), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
 		 final String assetDir = getFilesDir().getAbsolutePath() + "/";
 		 downloadAssets();
@@ -75,7 +87,7 @@
  
 	 private void downloadAssets() {
 		 final String assetDir = getFilesDir().getAbsolutePath() + "/";
-		 List<String> files = Arrays.asList("testcinema.ox3dv", "cinema.jpeg", "trex-attribution.txt", "trex.mtl", "trex.obj", "trex.png");
+		 List<String> files = Arrays.asList("testcinema.ox3dv", "cinema.jpeg", "trex-attribution.txt", "trex.mtl", "trex.obj", "trex.png", "samsung-masked_kl4BCZJH.mp4");
 		 for (String file : files) {
 			 String fileURL = ASSET_URL_BASE + file;
 			 downloadFile(fileURL, assetDir, file);
@@ -158,5 +170,11 @@
 	  */
 	 public static native boolean initializeFeatureTracker(String inputMedium, String pattern, String resolution);
 	 public static native boolean boundingBoxEdges();
+ 
+	 private void playVideo(String videoPath) {
+		 Uri videoUri = Uri.parse(videoPath);
+		 videoView.setVideoURI(videoUri);
+		 videoView.start();
+	 }
  }
  
