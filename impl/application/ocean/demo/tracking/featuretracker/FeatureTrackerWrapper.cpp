@@ -17,6 +17,7 @@
 #include "ocean/io/CameraCalibrationManager.h"
 #include "ocean/io/Directory.h"
 #include "ocean/io/File.h"
+#include "ocean/base/String.h"
 
 #include "ocean/media/FiniteMedium.h"
 #include "ocean/media/Manager.h"
@@ -382,7 +383,7 @@ void FeatureTrackerWrapper::release()
 #endif
 }
 
-bool isBoundingBoxEdges;
+std::string beb = "";
 
 bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 {
@@ -480,8 +481,9 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 
 		// the resulting pose transforms points defined in the coordinate system of the camera to points defined in the coordinate system of the world (the pattern)
 
-		isBoundingBoxEdges = true;
-		Log::info() << "Aman 481:" << isBoundingBoxEdges;
+
+		beb = "true";
+		// Log::info() << "Aman 481:" << isBoundingBoxEdges;
 		FeatureTrackerWrapper::boundingBoxEdges();
 		ocean_assert(!resultingTransformationSamples.empty());
 		const HomogenousMatrix4& resultingPose = resultingTransformationSamples.front().transformation();
@@ -492,13 +494,16 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
  
 		const uint8_t* const black = CV::Canvas::black(rgbFrame.pixelFormat());
 		const uint8_t* const white = CV::Canvas::white(rgbFrame.pixelFormat());
+		
+		// Log::debug() << "Aman 491: resulting Pose: " << resultingPoseIF;
+		// Log::debug() << " black: " << static_cast<int>(*black) << " white: " << static_cast<int>(*white);
 
-		// Tracking::Utilities::paintBoundingBoxIF(rgbFrame, resultingPoseIF, *anyCamera_, objectDimension_, white, black);
-		Tracking::Utilities::paintCoordinateSystemIF(rgbFrame, resultingPoseIF, *anyCamera_, HomogenousMatrix4(true), objectDimension_.diagonal() * Scalar(0.1));
+		auto boundingBoxEdge = Tracking::Utilities::paintBoundingBoxIF(rgbFrame, resultingPoseIF, *anyCamera_, objectDimension_, white, black);
+		beb = boundingBoxEdge;
 	}
 	else
 	{
-		isBoundingBoxEdges = false;
+		beb = "";
 		FeatureTrackerWrapper::boundingBoxEdges();
 		performance_.stop();
 	}
@@ -512,8 +517,8 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 	return true;
 }
 
-bool FeatureTrackerWrapper::boundingBoxEdges()
+std::string FeatureTrackerWrapper::boundingBoxEdges()
 {
-	Log::info() << "Aman 518 + " << isBoundingBoxEdges;
-	return isBoundingBoxEdges;
+	std::string abc = beb;
+	return abc;
 }

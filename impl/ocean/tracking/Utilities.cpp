@@ -501,7 +501,7 @@ void Utilities::paintPointsIF(Frame& frame, const HomogenousMatrix4& flippedCame
 	}
 }
 
-void Utilities::paintBoundingBoxIF(Frame& frame, const HomogenousMatrix4& flippedCamera_T_world, const AnyCamera& anyCamera, const Box3& boundingBox, const uint8_t* foregroundColor, const uint8_t* backgroundColor, const bool edgesOnly)
+std::string Utilities::paintBoundingBoxIF(Frame& frame, const HomogenousMatrix4& flippedCamera_T_world, const AnyCamera& anyCamera, const Box3& boundingBox, const uint8_t* foregroundColor, const uint8_t* backgroundColor, const bool edgesOnly)
 {
 	ocean_assert(frame && flippedCamera_T_world.isValid() && anyCamera.isValid() && boundingBox);
 	ocean_assert(frame.width() == anyCamera.width() && frame.height() == anyCamera.height());
@@ -538,15 +538,20 @@ void Utilities::paintBoundingBoxIF(Frame& frame, const HomogenousMatrix4& flippe
 						const Vector2 projected0(anyCamera.projectToImageIF(flippedCamera_T_world, point0));
 						const Vector2 projected1(anyCamera.projectToImageIF(flippedCamera_T_world, point1));
 
-						if (backgroundColor)
-						{
-							CV::Canvas::line<3u>(frame, projected0.x(), projected0.y(), projected1.x(), projected1.y(), backgroundColor);
-						}
+						// Tracking the cordinates of the projected points
+						Log::info() << "Projected point0: " << projected0 << ", point1: " << projected1;
+						std::string projections = "Projected point0: (" + std::to_string(projected0.x()) + ", " + std::to_string(projected0.y()) + "), point1: (" + std::to_string(projected1.x()) + ", " + std::to_string(projected1.y()) + ")";
+						return projections;
 
-						if (foregroundColor)
-						{
-							CV::Canvas::line<1u>(frame, projected0.x(), projected0.y(), projected1.x(), projected1.y(), foregroundColor);
-						}
+						// if (backgroundColor)
+						// {
+							// CV::Canvas::line<3u>(frame, projected0.x(), projected0.y(), projected1.x(), projected1.y(), backgroundColor);
+						// }
+
+						// if (foregroundColor)
+						// {
+						// 	CV::Canvas::line<1u>(frame, projected0.x(), projected0.y(), projected1.x(), projected1.y(), foregroundColor);
+						// }
 					}
 				}
 			}

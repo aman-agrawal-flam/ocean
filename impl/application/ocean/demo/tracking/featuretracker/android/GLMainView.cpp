@@ -99,7 +99,8 @@ jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrack
 	return true;
 }
 
-jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_boundingBoxEdges(JNIEnv* env, jobject javaThis) {=
+jstring Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_boundingBoxEdges(JNIEnv* env, jobject javaThis) {
 	FeatureTrackerWrapper featureTrackerWrapper;
-	return featureTrackerWrapper.boundingBoxEdges();
+	std::string resultStr = "Substraction Result: " + featureTrackerWrapper.boundingBoxEdges();
+	return env->NewStringUTF(resultStr.c_str());
 }

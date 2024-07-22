@@ -85,8 +85,8 @@ class FeatureTrackerWrapper
 		/**
 		 * Returns the camera pose of the last frame that has been handled.
 		 * @return The camera pose of the last frame that has been handled
-		 */	
-		bool boundingBoxEdges();
+		 */
+		std::string boundingBoxEdges();
 
 		/**
 		 * Returns the input medium which is used.
