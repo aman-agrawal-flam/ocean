@@ -420,7 +420,7 @@ class OCEAN_TRACKING_EXPORT Utilities
 		 * @param backgroundColor The background color of the plane, nullptr to skip the painting with the background color
 		 * @param edgesOnly True, to paint the edges of the bounding box only; False, to paint also the diagonal connections
 		 */
-		static void paintBoundingBoxIF(Frame& frame, const HomogenousMatrix4& flippedCamera_T_world, const AnyCamera& anyCamera, const Box3& boundingBox, const uint8_t* foregroundColor, const uint8_t* backgroundColor, const bool edgesOnly = true);
+		static std::string paintBoundingBoxIF(Frame& frame, const HomogenousMatrix4& flippedCamera_T_world, const AnyCamera& anyCamera, const Box3& boundingBox, const uint8_t* foregroundColor, const uint8_t* backgroundColor, const bool edgesOnly = true);
 
 		/**
 		 * Paints a (projected) wire-frame cone into a given frame.
