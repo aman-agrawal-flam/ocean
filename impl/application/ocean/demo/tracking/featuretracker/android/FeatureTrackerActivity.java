@@ -51,7 +51,10 @@
 			 if (boundingBoxEdges() != "") {
 				// Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
 				playVideo(getFilesDir().getAbsolutePath() + "/samsung-masked_kl4BCZJH.mp4");
- 	
+			 }
+			 else {
+				// stop the video
+					videoView.stopPlayback();
 			 }
 			 // Schedule this task again in the near future (e.g., 1000ms later)
 			 handler.postDelayed(this, 1000);
@@ -171,6 +174,7 @@
 	 public static native boolean initializeFeatureTracker(String inputMedium, String pattern, String resolution);
 	 public static native String boundingBoxEdges();
 
+	 /*
 	private void playVideo(String videoPath) {
 		float[] points = parseBoundingBoxEdges(boundingBoxEdges());
         if (points == null || points.length < 4) {
@@ -210,6 +214,43 @@
 			videoView.resume();
 		}
     }
+	 */
+	
+
+	private ExecutorService videoPlaybackExecutor = Executors.newSingleThreadExecutor();
+	private Handler uiHandler = new Handler(Looper.getMainLooper());
+
+	private void playVideo(String videoPath) {
+		videoPlaybackExecutor.execute(() -> {
+			float[] points = parseBoundingBoxEdges(boundingBoxEdges());
+			if (points == null || points.length < 4) {
+				return;
+			}
+			// Calculate dimensions and position for the VideoView
+			int width = Math.abs((int) (points[2] - points[0]));
+			int height = Math.abs((int) (points[3] - points[1]));
+			int left = (int) points[0];
+			int top = (int) points[1];
+
+			// Post UI updates back to the main thread
+			uiHandler.post(() -> {
+				FrameLayout.LayoutParams videoParams = new FrameLayout.LayoutParams(width, height);
+				videoParams.leftMargin = left;
+				videoParams.topMargin = top;
+				videoView.setLayoutParams(videoParams);
+
+				// Check if the video URI is already set and the video is playing
+				if (!videoView.isPlaying() && videoView.getTag() == null || !videoView.getTag().equals(videoPath)) {
+					Uri videoUri = Uri.parse(videoPath);
+					videoView.setVideoURI(videoUri);
+					videoView.setTag(videoPath); // Tag the VideoView with the current video path
+					videoView.start();
+				} else if (!videoView.isPlaying()) {
+					videoView.resume();
+				}
+			});
+		});
+	}
 
 	private float[] parseBoundingBoxEdges(String boundingBoxEdges) {
         try {

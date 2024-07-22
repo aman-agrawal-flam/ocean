@@ -544,15 +544,15 @@ std::string Utilities::paintBoundingBoxIF(Frame& frame, const HomogenousMatrix4&
 						std::string projections = std::to_string(projected0.x()) + "," + std::to_string(projected0.y()) + "," + std::to_string(projected1.x()) + "," + std::to_string(projected1.y());
 						return projections;
 
-						// if (backgroundColor)
-						// {
-							// CV::Canvas::line<3u>(frame, projected0.x(), projected0.y(), projected1.x(), projected1.y(), backgroundColor);
-						// }
+						if (backgroundColor)
+						{
+							CV::Canvas::line<3u>(frame, projected0.x(), projected0.y(), projected1.x(), projected1.y(), backgroundColor);
+						}
 
-						// if (foregroundColor)
-						// {
-						// 	CV::Canvas::line<1u>(frame, projected0.x(), projected0.y(), projected1.x(), projected1.y(), foregroundColor);
-						// }
+						if (foregroundColor)
+						{
+							CV::Canvas::line<1u>(frame, projected0.x(), projected0.y(), projected1.x(), projected1.y(), foregroundColor);
+						}
 					}
 				}
 			}
