@@ -17,6 +17,7 @@
 #include "ocean/io/CameraCalibrationManager.h"
 #include "ocean/io/Directory.h"
 #include "ocean/io/File.h"
+#include "ocean/base/String.h"
 
 #include "ocean/media/FiniteMedium.h"
 #include "ocean/media/Manager.h"
@@ -516,8 +517,8 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 	return true;
 }
 
-bool FeatureTrackerWrapper::boundingBoxEdges()
+std::string FeatureTrackerWrapper::boundingBoxEdges()
 {
-	Log::info() << "Aman 518 + " << isBoundingBoxEdges;
-	return isBoundingBoxEdges;
+	std::string a = "Aman 85";
+	return "dafajf";
 }
