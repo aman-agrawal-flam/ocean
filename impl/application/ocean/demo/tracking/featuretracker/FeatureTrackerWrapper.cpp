@@ -480,6 +480,7 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
 
 		// the resulting pose transforms points defined in the coordinate system of the camera to points defined in the coordinate system of the world (the pattern)
 
+
 		isBoundingBoxEdges = true;
 		Log::info() << "Aman 481:" << isBoundingBoxEdges;
 		FeatureTrackerWrapper::boundingBoxEdges();
@@ -492,6 +493,9 @@ bool FeatureTrackerWrapper::trackNewFrame(Frame& resultFrame, double& time)
  
 		const uint8_t* const black = CV::Canvas::black(rgbFrame.pixelFormat());
 		const uint8_t* const white = CV::Canvas::white(rgbFrame.pixelFormat());
+		
+		// Log::debug() << "Aman 491: resulting Pose: " << resultingPoseIF;
+		// Log::debug() << " black: " << static_cast<int>(*black) << " white: " << static_cast<int>(*white);
 
 		// Tracking::Utilities::paintBoundingBoxIF(rgbFrame, resultingPoseIF, *anyCamera_, objectDimension_, white, black);
 		Tracking::Utilities::paintCoordinateSystemIF(rgbFrame, resultingPoseIF, *anyCamera_, HomogenousMatrix4(true), objectDimension_.diagonal() * Scalar(0.1));
