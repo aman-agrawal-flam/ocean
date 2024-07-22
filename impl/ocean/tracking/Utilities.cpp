@@ -539,8 +539,9 @@ std::string Utilities::paintBoundingBoxIF(Frame& frame, const HomogenousMatrix4&
 						const Vector2 projected1(anyCamera.projectToImageIF(flippedCamera_T_world, point1));
 
 						// Tracking the cordinates of the projected points
-						Log::info() << "Projected point0: " << projected0 << ", point1: " << projected1;
-						std::string projections = "Projected point0: (" + std::to_string(projected0.x()) + ", " + std::to_string(projected0.y()) + "), point1: (" + std::to_string(projected1.x()) + ", " + std::to_string(projected1.y()) + ")";
+						// Log::info() << "Projected point0: " << projected0 << ", point1: " << projected1;
+						Log::info() << "Frame: width: " << frame.width() << "height: " << frame.height();
+						std::string projections = std::to_string(projected0.x()) + "," + std::to_string(projected0.y()) + "," + std::to_string(projected1.x()) + "," + std::to_string(projected1.y());
 						return projections;
 
 						// if (backgroundColor)

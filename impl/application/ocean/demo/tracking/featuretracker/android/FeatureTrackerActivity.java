@@ -27,6 +27,8 @@
  import java.util.List;
  import android.widget.VideoView;
  import android.net.Uri;
+ import android.widget.FrameLayout;
+
  
  /**
   * This class implements the main Activity object for the Feature Tracker (Android).
@@ -46,10 +48,8 @@
 	 private Runnable logBoundingBoxEdgesTask = new Runnable() {
 		 @Override
 		 public void run() {
-			 // Log the bounding box edges
-			 Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
 			 if (boundingBoxEdges() != "") {
-				Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
+				// Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
 				playVideo(getFilesDir().getAbsolutePath() + "/samsung-masked_kl4BCZJH.mp4");
  	
 			 }
@@ -170,11 +170,68 @@
 	  */
 	 public static native boolean initializeFeatureTracker(String inputMedium, String pattern, String resolution);
 	 public static native String boundingBoxEdges();
- 
-	 private void playVideo(String videoPath) {
-		 Uri videoUri = Uri.parse(videoPath);
-		 videoView.setVideoURI(videoUri);
-		//  videoView.start();
-	 }
+
+	private void playVideo(String videoPath) {
+		float[] points = parseBoundingBoxEdges(boundingBoxEdges());
+        if (points == null || points.length < 4) {
+            // Log.e(TAG, "Aman Invalid bounding box edges: " + boundingBoxEdges());
+            return;
+        }
+        // Example projected points
+        float point0X = points[0];
+        float point0Y = points[1];
+        float point1X = points[2];
+        float point1Y = points[3];
+
+        // Calculate dimensions based on projected points
+        int width = Math.abs((int) (point1X - point0X));
+        int height = Math.abs((int) (point1Y - point0Y));
+
+        // Calculate top-left corner
+        int left = (int) point0X;
+        int top = (int) point0Y;
+
+        // Set the position and size of the VideoView
+        FrameLayout.LayoutParams videoParams = (FrameLayout.LayoutParams) videoView.getLayoutParams();
+        videoParams.width = width;
+        videoParams.height = height;
+        videoParams.leftMargin = left;
+        videoParams.topMargin = top;
+        videoView.setLayoutParams(videoParams);
+
+        Uri videoUri = Uri.parse(videoPath);
+        videoView.setVideoURI(videoUri);
+		if (!videoView.isPlaying()) {
+			// Log.i(TAG, "Aman Video is playing");
+			videoView.start();
+		}
+		else {
+			// Log.i(TAG, "Aman Video is resuming");
+			videoView.resume();
+		}
+    }
+
+	private float[] parseBoundingBoxEdges(String boundingBoxEdges) {
+        try {
+			Log.i(TAG, "Aman Bounding box edges " + boundingBoxEdges);
+			// use regex to extract the values
+			String[] parts = boundingBoxEdges.split("[^\\d.-]+");
+			if (parts.length < 4) {
+				Log.e(TAG, "Aman Invalid bounding box edges: " + boundingBoxEdges);
+				return null;
+			}
+	
+			Log.e(TAG, "Aman Bounding box eddges trimmed " + Arrays.toString(parts));
+            return new float[] {
+                Float.parseFloat(parts[0].trim()),
+                Float.parseFloat(parts[1].trim()),
+                Float.parseFloat(parts[2].trim()),
+                Float.parseFloat(parts[3].trim())
+            };
+        } catch (Exception e) {
+            Log.e(TAG, "Error parsing bounding box edges: " + e.getMessage(), e);
+            return null;
+        }
+    }
  }
  
