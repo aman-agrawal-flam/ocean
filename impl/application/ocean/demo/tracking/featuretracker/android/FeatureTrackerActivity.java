@@ -48,8 +48,8 @@
 		 public void run() {
 			 // Log the bounding box edges
 			 Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
-			 if (boundingBoxEdges() != "Hello") {
-			
+			 if (boundingBoxEdges() != "") {
+				Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
 				playVideo(getFilesDir().getAbsolutePath() + "/samsung-masked_kl4BCZJH.mp4");
  	
 			 }
