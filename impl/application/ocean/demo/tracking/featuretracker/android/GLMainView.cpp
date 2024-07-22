@@ -99,12 +99,7 @@ jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrack
 	return true;
 }
 
-jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_boundingBoxEdges(JNIEnv* env, jobject javaThis) {
-    // FeatureTrackerWrapper* featureTracker = FeatureTrackerWrapper::get<FeatureTrackerWrapper>();
-    // if (featureTracker && featureTracker->boundingBoxEdges()) {
-    //     return true;
-    // }
-    // return false;
+jboolean Java_com_flam_fit_app_demo_tracking_featuretracker_android_FeatureTrackerActivity_boundingBoxEdges(JNIEnv* env, jobject javaThis) {=
 	FeatureTrackerWrapper featureTrackerWrapper;
 	return featureTrackerWrapper.boundingBoxEdges();
 }
