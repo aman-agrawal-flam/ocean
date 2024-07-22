@@ -48,7 +48,7 @@
 		 public void run() {
 			 // Log the bounding box edges
 			 Log.i(TAG, "Aman Bounding box edges are detected " + boundingBoxEdges());
-			 if (boundingBoxEdges()) {
+			 if (boundingBoxEdges() != "Hello") {
 			
 				playVideo(getFilesDir().getAbsolutePath() + "/samsung-masked_kl4BCZJH.mp4");
  	
@@ -169,12 +169,12 @@
 	  * @return True, if succeeded
 	  */
 	 public static native boolean initializeFeatureTracker(String inputMedium, String pattern, String resolution);
-	 public static native boolean boundingBoxEdges();
+	 public static native String boundingBoxEdges();
  
 	 private void playVideo(String videoPath) {
 		 Uri videoUri = Uri.parse(videoPath);
 		 videoView.setVideoURI(videoUri);
-		 videoView.start();
+		//  videoView.start();
 	 }
  }
  
