@@ -466,6 +466,7 @@ unsigned int BoxT3<T>::corners(VectorT3<T>* corners) const
 	corners[5] = VectorT3<T>(higher_.x(), lower_.y(), higher_.z());
 	corners[6] = VectorT3<T>(higher_.x(), higher_.y(), lower_.z());
 	corners[7] = VectorT3<T>(higher_.x(), higher_.y(), higher_.z());
+	// Log::info() << "Aman Corners 1 " << corners[0] << " " << corners[1] << " 2 " << corners[2] << " 3 " << corners[3] << " 4 " << corners[4] << " 5 " << corners[5] << " 6 " << corners[7]; 
 	return 8u;
 }
 
